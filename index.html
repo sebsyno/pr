@@ -353,6 +353,48 @@ mark {
 }
 </style>
 </head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRZTCBFVC0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GRZTCBFVC0');
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dotsContainer = document.getElementById('t-dots');
+    const counter = document.getElementById('t-counter');
+    let current = 0;
+
+    slides.forEach((slide, i) => {
+      slide.style.display = '';
+      slide.classList.remove('active');
+
+      const dot = document.createElement('button');
+      dot.className = 'testimonial-dot';
+      dot.setAttribute('aria-label', `Slide ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dotsContainer.children[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dotsContainer.children[current].classList.add('active');
+      counter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('t-prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('t-next').addEventListener('click', () => goTo(current + 1));
+
+    goTo(0);
+  });
+</script>
 <body>
   
 <nav>
